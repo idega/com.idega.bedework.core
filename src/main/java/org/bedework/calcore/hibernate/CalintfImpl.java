@@ -64,10 +64,9 @@ import net.fortuna.ical4j.model.Period;
 
 import org.hibernate.FlushMode;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.stat.Statistics;
 
-import com.idega.hibernate.HibernateUtil;
+import com.idega.hibernate.SessionFactoryUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -1094,7 +1093,7 @@ public class CalintfImpl extends CalintfBase implements PrivilegeDefs {
 				return sessionFactory;
 			}
 
-			sessionFactory = HibernateUtil.getSessionFactory();
+			sessionFactory = SessionFactoryUtil.getSessionFactory();
 
 			return sessionFactory;
 		}

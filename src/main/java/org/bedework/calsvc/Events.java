@@ -18,6 +18,14 @@
 */
 package org.bedework.calsvc;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.bedework.calcorei.CoreEventInfo;
 import org.bedework.calcorei.CoreEventsI.InternalEventKey;
 import org.bedework.calcorei.CoreEventsI.UpdateEventResult;
@@ -60,20 +68,17 @@ import edu.rpi.cmt.calendar.IcalDefs;
 import edu.rpi.cmt.calendar.PropertyIndex.PropertyInfoIndex;
 import edu.rpi.sss.util.xml.tagdefs.CaldavTags;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.servlet.http.HttpServletResponse;
-
 /** This acts as an interface to the database for subscriptions.
  *
  * @author Mike Douglass       douglm - rpi.edu
  */
 class Events extends CalSvcDb implements EventsI {
-  Events(final CalSvc svci,
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4937365301819122731L;
+
+Events(final CalSvc svci,
          final BwUser user) {
     super(svci, user);
   }
@@ -721,7 +726,7 @@ class Events extends CalSvcDb implements EventsI {
 
   void updateEntities(final UpdateResult updResult,
                       final BwEvent event) throws CalFacadeException {
-
+	  
     BwContact ct = event.getContact();
 
     if (ct != null) {
@@ -750,6 +755,7 @@ class Events extends CalSvcDb implements EventsI {
       // XXX only do this if we know it changed
       event.setLocation(eeerl.entity);
     }
+  
   }
 
   /** Return all keys or all with a lastmod greater than or equal to that supplied.

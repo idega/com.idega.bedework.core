@@ -217,7 +217,7 @@ class Synch extends CalSvcDb implements SynchI {
 		SubscribeResponseType sresp = getPort(getSynchUri()).subscribe(
 				getIdToken(getPrincipal().getPrincipalRef(), sc), subreq);
 		// FIXME lets make some new hack...
-		sresp.setStatus(StatusType.OK);
+//		sresp.setStatus(StatusType.OK);
 		
 		if (sresp.getStatus() != StatusType.OK) {
 			return false;
@@ -249,7 +249,7 @@ class Synch extends CalSvcDb implements SynchI {
 				getIdToken(getPrincipal().getPrincipalRef(), sc), usreq);
 		
 		// FIXME Another hack
-		usresp.setStatus(StatusType.OK);
+//		usresp.setStatus(StatusType.OK);
 		
 		if (usresp.getStatus() != StatusType.OK) {
 			return false;

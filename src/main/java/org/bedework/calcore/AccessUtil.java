@@ -18,6 +18,10 @@
 */
 package org.bedework.calcore;
 
+import java.util.Collection;
+import java.util.TreeSet;
+
+import org.apache.log4j.Logger;
 import org.bedework.calfacade.BwCalendar;
 import org.bedework.calfacade.BwCategory;
 import org.bedework.calfacade.BwContact;
@@ -36,13 +40,8 @@ import edu.rpi.cmt.access.AccessPrincipal;
 import edu.rpi.cmt.access.Ace;
 import edu.rpi.cmt.access.AceWho;
 import edu.rpi.cmt.access.Acl;
-import edu.rpi.cmt.access.PrivilegeSet;
 import edu.rpi.cmt.access.Acl.CurrentAccess;
-
-import org.apache.log4j.Logger;
-
-import java.util.Collection;
-import java.util.TreeSet;
+import edu.rpi.cmt.access.PrivilegeSet;
 
 /** An access helper class. This class makes some assumptions about the
  * classes it deals with but there are no explicit hibernate, or other
@@ -57,7 +56,12 @@ import java.util.TreeSet;
  * @author Mike Douglass
  */
 public class AccessUtil implements AccessUtilI {
-  private boolean debug;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6225166055510492705L;
+
+private boolean debug;
 
   /** For evaluating access control
    */
@@ -452,7 +456,14 @@ public class AccessUtil implements AccessUtilI {
 
       String path = container.getPath();
 
-      CalendarWrapper wcol = (CalendarWrapper)container;
+      CalendarWrapper wcol = null;
+      if (container instanceof CalendarWrapper) {
+    	  	wcol = (CalendarWrapper)container;
+      } else if (container instanceof BwCalendar) {
+    	  	wcol = new CalendarWrapper(container, this);
+      }
+      
+      
 
       String aclStr;
       char[] aclChars = null;
